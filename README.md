@@ -7,7 +7,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat&logo=vercel&logoColor=white)
 
-Production website for **Aurevia Health**, a Toronto-based digital-health nonprofit. Built and maintained solo during a Software Development & QA internship — from first line of code to live deployment on a custom domain.
+Production website for **Aurevia Health**, a Toronto-based digital-health nonprofit. Built and maintained solo during a Software Development & QA internship, from first line of code to live deployment on a custom domain.
 
 ## About Aurevia Health
 
@@ -15,11 +15,11 @@ Aurevia Health connects emerging digital-health leaders through events and progr
 
 ## My Role
 
-Software Development & QA Intern, May–Aug 2026. Full ownership of the website: design, development, deployment, and ongoing maintenance, working directly from stakeholder direction and iterating through multiple rounds of content and design revisions.
+Software Development & QA Intern, May–Aug 2026. Full ownership of the website: design, development, deployment, and ongoing maintenance, working directly from project manager's direction and iterating through multiple rounds of content and design revisions.
 
 ## Tech Stack
 
-Hand-written **HTML, CSS, and vanilla JavaScript** — no framework, no CMS, no build step. Each page is self-contained and fully static.
+**HTML, CSS, and vanilla JavaScript**. Each page is self-contained and fully static.
 
 Notable implementation details:
 - Scroll-triggered reveal animations via `IntersectionObserver`
@@ -29,7 +29,7 @@ Notable implementation details:
 
 ## Pages
 
-Six pages — Home, Programs, About, Get Involved, Contact, Careers — sharing a consistent design system, navigation, and footer. Visual direction and page structure were designed from a stakeholder-supplied reference site and written content brief.
+Six pages — Home, Programs, About, Get Involved, Contact, Careers — sharing a consistent design system, navigation, and footer. Visual direction and page structure were designed from PM's requests and written content brief.
 
 ## Testing & QA
 
@@ -44,7 +44,7 @@ A significant part of this project was identifying and fixing real-world renderi
 - **Hosting:** Vercel
 - **Domain:** Custom domain (`aureviahealth.ca`), registered separately and connected via DNS configuration
 - **CI/CD:** Git-based — every push to `main` triggers an automatic production deployment
-- **Collaboration:** Repository shared with project stakeholders, who can edit content directly through GitHub's web interface without needing local tooling
+- **Collaboration:** Repository shared with project stakeholders, who can edit content directly without needing local tooling
 
 ## Project Status
 
