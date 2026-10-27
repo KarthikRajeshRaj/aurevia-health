@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurevia Health</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0c1a2e;
+  --navy-mid:#162640;
+  --navy-accent:#3a6ea8;
+  --gold:#c9a84c;
+  --gold-light:#e8c86a;
+  --cream:#f5f7fc;
+  --cream-dark:#e8edf5;
+  --cream-border:#d0d9e8;
+  --text:#0e1a2e;
+  --text-mid:#2a3f5e;
+  --text-soft:#5a6e8a;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,246,236,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--cream-border);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}.logo-img{width:46px;height:46px;flex-shrink:0;display:block;border-radius:50%}.logo-name{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:var(--navy);letter-spacing:.01em;line-height:1}.logo-name-light{color:var(--gold)}
+.logo-circle{width:38px;height:38px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+
+.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--text-soft);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-btn{padding:.5rem 1.3rem;background:var(--gold);color:var(--navy);font-size:.85rem;font-weight:700;border-radius:100px;text-decoration:none;transition:all .2s}
+.nav-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--navy);padding:8rem 5% 5rem;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15}
+.hero-blob.b1{width:500px;height:500px;background:var(--navy-accent);top:-100px;right:-100px}
+.hero-blob.b2{width:300px;height:300px;background:var(--gold);bottom:50px;left:5%}
+.hero-inner{position:relative;z-index:5;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:.4rem 1rem;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1.5rem;opacity:0;animation:slideIn .8s .2s ease forwards}
+.hero-pill::before{content:'●';font-size:.5rem;animation:blink 2s infinite}
+.hero-h1{font-family:'Lora',serif;font-size:clamp(2.5rem,4.5vw,3.8rem);font-weight:700;line-height:1.15;color:white;margin-bottom:1.5rem;opacity:0;animation:slideIn .9s .4s ease forwards}
+.hero-h1 em{font-style:italic;color:var(--gold-light)}
+.hero-p{font-size:1rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.65);max-width:450px;margin-bottom:2.5rem;opacity:0;animation:slideIn .9s .6s ease forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideIn .9s .8s ease forwards}
+.btn-amber{padding:.85rem 2rem;background:var(--gold);color:var(--navy);font-size:.9rem;font-weight:700;border-radius:100px;text-decoration:none;transition:all .2s}
+.btn-amber:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 28px rgba(245,158,11,.35)}
+.btn-ghost-white{padding:.85rem 2rem;border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);font-size:.9rem;font-weight:600;border-radius:100px;text-decoration:none;transition:all .2s}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,.7);color:white}
+/* right side hero */
+.hero-right{position:relative;opacity:0;animation:fadeRight 1s .7s ease forwards}
+.hero-testimonial{background:rgba(14,26,46,.82);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:2rem;backdrop-filter:blur(6px);box-shadow:0 12px 40px rgba(0,0,0,.35);margin-bottom:1.5rem}
+.ht-stars{color:var(--gold);font-size:.9rem;margin-bottom:.75rem;letter-spacing:.1em}
+.ht-text{font-family:'Lora',serif;font-style:italic;font-size:1rem;line-height:1.6;color:rgba(255,255,255,.85);margin-bottom:1rem}
+.ht-author{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.5)}
+.hero-badges{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hero-badge{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:1.25rem;text-align:center}
+.hb-num{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:var(--gold-light);display:block}
+.hb-label{font-size:.75rem;color:rgba(255,255,255,.5)}
+
+/* STATS */
+.stats-band{background:var(--gold);padding:2rem 5%;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:1rem}
+.sb-num{font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--navy);display:block}
+.sb-label{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(27,67,50,.65);margin-top:.2rem}
+
+/* PROGRAMS */
+#programs{padding:6rem 5%;background:var(--cream)}
+.prog-top{text-align:center;margin-bottom:3rem}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-mid);margin-bottom:.6rem}
+.h2{font-family:'Lora',serif;font-size:clamp(1.8rem,3vw,2.7rem);font-weight:700;line-height:1.15;color:var(--navy)}
+.h2 em{font-style:italic;color:var(--navy-mid)}
+.prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.prog-card{background:white;border:1.5px solid var(--cream-border);border-radius:16px;padding:2rem;display:flex;gap:1.25rem;transition:all .3s;cursor:default}
+.prog-card:hover{border-color:var(--navy-accent);box-shadow:0 8px 32px rgba(27,67,50,.1);transform:translateY(-3px)}
+.prog-icon-wrap{width:52px;height:52px;min-width:52px;background:var(--cream);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1.5px solid var(--cream-border)}
+.prog-info{}
+.prog-name{font-family:'Lora',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.prog-desc{font-size:.85rem;font-weight:400;line-height:1.7;color:var(--text-soft)}
+.prog-link{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:700;color:var(--navy-mid);margin-top:.75rem;text-decoration:none;transition:gap .2s}
+.prog-link:hover{gap:8px}
+
+/* ABOUT */
+#about{padding:0;background:var(--cream-dark);overflow:hidden}
+.about-wrap{display:grid;grid-template-columns:1fr 1fr}
+.about-img{background:var(--navy-mid);min-height:500px;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem;position:relative;overflow:hidden}
+.about-img-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%)}
+.about-img-text{font-family:'Lora',serif;font-size:5rem;color:rgba(255,255,255,.07);position:absolute;top:2rem;left:2rem;line-height:1;font-style:italic}
+.about-img-stat{position:relative;background:var(--gold);border-radius:14px;padding:1.25rem 1.5rem;display:inline-block}
+.about-img-stat .bnum{font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--navy)}
+.about-img-stat .blabel{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(27,67,50,.7)}
+.about-content{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.about-values{display:flex;flex-direction:column;gap:.75rem;margin:1.5rem 0 2rem}
+.av-item{display:flex;align-items:flex-start;gap:.75rem}
+.av-check{width:22px;height:22px;min-width:22px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:.65rem;margin-top:2px}
+.av-text{font-size:.92rem;line-height:1.6;color:var(--text-mid)}
+
+/* QUOTE BAND */
+.quote-band{background:var(--navy);padding:5rem 5%;text-align:center}
+.qb-text{font-family:'Lora',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;line-height:1.55;color:white;max-width:680px;margin:0 auto 1.5rem}
+.qb-author{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light)}
+
+/* INVOLVE */
+#involve{padding:6rem 5%;background:var(--cream)}
+.inv-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:3rem}
+.inv-form{background:white;border:1.5px solid var(--cream-border);border-radius:20px;padding:2.5rem}
+.inv-form h3{font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom.5rem;margin-bottom:.5rem}
+.inv-form p{font-size:.87rem;color:var(--text-soft);margin-bottom:1.5rem;line-height:1.6}
+.form-group{margin-bottom:1rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.75rem 1rem;background:var(--cream);border:1.5px solid var(--cream-border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--navy-accent)}
+.btn-forest{width:100%;padding:.85rem;background:var(--navy);color:white;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
+.btn-forest:hover{background:var(--navy-mid)}
+.inv-options{display:flex;flex-direction:column;gap:1rem}
+.inv-opt{background:white;border:1.5px solid var(--cream-border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all .3s;cursor:pointer}
+.inv-opt:hover{border-color:var(--navy-accent);box-shadow:0 4px 16px rgba(27,67,50,.08)}
+.io-icon{width:44px;height:44px;min-width:44px;background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.io-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.2rem}
+.io-desc{font-size:.8rem;color:var(--text-soft)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:4rem 5% 2rem}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.ft-brand{font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:white;margin-bottom:.6rem}
+.ft-tag{font-size:.84rem;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:1.25rem}
+.ft-col-title{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.9rem}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.ft-links a{font-size:.85rem;font-weight:400;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:white}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.ft-copy{font-size:.74rem;color:rgba(255,255,255,.25)}
+.ft-reg{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.from-left{transform:translateX(-28px)}.reveal.from-right{transform:translateX(28px)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+@keyframes slideIn{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeRight{to{opacity:1}}
+@keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  #hero{padding:7rem 1.5rem 4rem}
+  .hero-inner,.about-wrap,.inv-header,.ft-top{grid-template-columns:1fr}
+  .hero-right,.about-img{display:none}
+  section:not(.page-hero){padding:4rem 1.5rem !important}
+  .stats-band{grid-template-columns:1fr 1fr}
+  .prog-grid{grid-template-columns:1fr}
+}
+
+/* ── INTERIOR PAGE HERO ── */
+.page-hero{background:var(--navy);padding:9rem 5% 5rem;position:relative;overflow:hidden}
+.page-hero .hero-blob.b1{width:500px;height:500px;background:var(--navy-accent);top:-120px;right:-100px}
+.page-hero .hero-blob.b2{width:300px;height:300px;background:var(--gold);bottom:-80px;left:5%}
+.hero-network{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-network svg{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+.net-line{stroke:url(#lineGrad);stroke-width:1.1}
+.net-grid-line{fill:none;stroke:url(#gridGrad);stroke-width:1}
+.net-node-dot{fill:url(#nodeGlow)}
+.net-icon{fill:none;stroke:url(#nodeGrad);stroke-width:2.2}
+.net-ring{fill:none;stroke:url(#nodeGrad);stroke-opacity:.85;stroke-width:1.5}
+@keyframes twinkle{0%,100%{opacity:.35}50%{opacity:.9}}
+
+.hero-inner{position:relative;z-index:2}
+.page-hero-inner{position:relative;max-width:820px}
+.page-hero .eyebrow{color:var(--gold-light)}
+.page-hero .eyebrow::before{background:var(--gold-light)}
+.page-hero h1{font-family:'Lora',serif;font-size:clamp(2.4rem,4.5vw,3.6rem);font-weight:700;line-height:1.12;color:white;margin-bottom:1.25rem}
+.page-hero h1 em{font-style:italic;color:var(--gold-light)}
+.page-hero p.lead{font-size:1.05rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,.65);max-width:560px}
+
+/* ── PROGRAMS PAGE ── */
+.pg-programs{padding:6rem 5%;background:var(--cream)}
+.pg-prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.pg-prog-card{background:white;border:1.5px solid var(--cream-border);border-radius:16px;padding:2.25rem;transition:all .3s}
+.pg-prog-card:hover{border-color:var(--navy-accent);box-shadow:0 12px 36px rgba(12,26,46,.1);transform:translateY(-4px)}
+.pg-prog-icon{width:56px;height:56px;background:var(--cream);border:1.5px solid var(--cream-border);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.25rem}
+.pg-prog-name{font-family:'Lora',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:.6rem}
+.pg-prog-num{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--gold);margin-bottom:.9rem}
+.pg-prog-desc{font-size:.92rem;font-weight:400;line-height:1.75;color:var(--text-soft)}
+
+/* ── ABOUT PAGE ── */
+.pg-section{padding:5.5rem 5%}
+.pg-section.alt{background:var(--cream-dark)}
+.pg-narrow{max-width:760px;margin:0 auto}
+.pg-section .eyebrow{margin-bottom:.8rem}
+.pg-h2{font-family:'Lora',serif;font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700;line-height:1.15;color:var(--navy);margin-bottom:1.5rem}
+.pg-h2 em{font-style:italic;color:var(--navy-mid)}
+.pg-body{font-size:1.02rem;font-weight:300;line-height:1.9;color:var(--text-mid);margin-bottom:1.25rem}
+.pg-pullquote{font-family:'Lora',serif;font-style:italic;font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.5;color:var(--navy);border-left:3px solid var(--gold);padding:.5rem 0 .5rem 1.75rem;margin:2rem 0}
+.pg-diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:900px;margin:2.5rem auto 0}
+.pg-diff-card{background:white;border:1.5px solid var(--cream-border);border-radius:16px;padding:2rem}
+.pg-diff-card .num{font-family:'Lora',serif;font-size:1.4rem;color:var(--gold);font-weight:700;margin-bottom:.5rem}
+.pg-diff-name{font-family:'Lora',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.pg-diff-desc{font-size:.9rem;font-weight:300;line-height:1.7;color:var(--text-soft)}
+
+/* ── CONTACT PAGE ── */
+.pg-contact{padding:6rem 5%;background:var(--cream)}
+.pg-contact-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.pg-contact-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.pg-contact-item{display:flex;align-items:center;gap:1rem;background:white;border:1.5px solid var(--cream-border);border-radius:14px;padding:1.25rem 1.5rem;transition:all .3s;text-decoration:none}
+.pg-contact-item:hover{border-color:var(--navy-accent);box-shadow:0 6px 20px rgba(12,26,46,.08)}
+.pg-contact-icon{width:44px;height:44px;min-width:44px;background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.pg-contact-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
+.pg-contact-val{font-size:.95rem;font-weight:600;color:var(--navy)}
+.pg-contact-msg .eyebrow{margin-bottom:.8rem}
+
+@media(max-width:900px){
+  .pg-prog-grid,.pg-diff-grid,.pg-contact-wrap{grid-template-columns:1fr}
+  .page-hero{padding:8rem 1.5rem 4rem}
+  .pg-programs,.pg-section,.pg-contact{padding:4rem 1.5rem !important}
+}
+
+
+/* ── MOBILE NAV (hamburger) ── */
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:120}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:all .3s;border-radius:2px}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--cream-border);flex-direction:column;padding:1rem 5% 1.5rem;z-index:110;box-shadow:0 12px 28px rgba(12,26,46,.12)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1rem;font-weight:600;color:var(--navy);text-decoration:none;padding:.85rem 0;border-bottom:1px solid var(--cream-border)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu .mobile-cta{margin-top:1rem;background:var(--gold);color:var(--navy);text-align:center;border-radius:100px;padding:.85rem;border-bottom:none;font-weight:700}
+
+@media(max-width:900px){
+  .nav-toggle{display:block}
+  .nav-btn{display:none}
+}
+
+
+@media(max-width:900px){
+  .inv-options{grid-template-columns:1fr !important;max-width:100% !important}
+}
+
+@media(max-width:900px){
+  .hero-network{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img class="logo-img" src="aurevia-logo.png" alt="Aurevia Health logo" width="46" height="46">
+    <span class="logo-name">Aurevia<span class="logo-name-light"> Health</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="programs.html">Programs</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="get-involved.html">Get Involved</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="careers.html">Careers</a></li>
+  </ul>
+  <a href="get-involved.html" class="nav-btn">Get Involved</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="programs.html">Programs</a>
+  <a href="about.html">About</a>
+  <a href="get-involved.html">Get Involved</a>
+  <a href="contact.html">Contact</a>
+  <a href="careers.html">Careers</a>
+</div>
+
+<section id="hero">
+  <div class="hero-network" aria-hidden="true">
+    <svg id="netSvg" viewBox="0 0 1100 750" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gradient for the person nodes -->
+        <linearGradient id="nodeGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f5e08a"/>
+          <stop offset="55%" stop-color="#e8c86a"/>
+          <stop offset="100%" stop-color="#c9a84c"/>
+        </linearGradient>
+        <!-- Gradient for connecting lines -->
+        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e8c86a"/>
+          <stop offset="100%" stop-color="#8a6d2f"/>
+        </linearGradient>
+        <!-- Gradient for grid wireframe -->
+        <linearGradient id="gridGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.35"/>
+          <stop offset="70%" stop-color="#c9a84c" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </linearGradient>
+        <!-- Soft glow behind the dome -->
+        <radialGradient id="domeGlow" cx="50%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#24406a" stop-opacity="0.6"/>
+          <stop offset="55%" stop-color="#16294a" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#0c1a2e" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Vertical fade: fully visible at top, transparent toward bottom -->
+        <linearGradient id="fadeGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+          <stop offset="45%" stop-color="#ffffff" stop-opacity="1"/>
+          <stop offset="78%" stop-color="#ffffff" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="fadeMask">
+          <rect x="0" y="0" width="1100" height="750" fill="url(#fadeGrad)"/>
+        </mask>
+      </defs>
+      <ellipse id="domeHalo" cx="560" cy="340" rx="440" ry="360" fill="url(#domeGlow)"/>
+      <g mask="url(#fadeMask)">
+        <g id="netGrid"></g>
+        <g id="netLines"></g>
+        <g id="netNodes"></g>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-pill">Registered Canadian Non-Profit</div>
+      <h1 class="hero-h1">The golden path to<br><em>better health</em></h1>
+      <p class="hero-p">More than networking. More than learning. Aurevia brings emerging digital health leaders together through engaging experiences that spark connections, conversations, and meaningful takeaways, with a shared commitment to wellbeing and mental health along the way.</p>
+      <div class="hero-btns">
+        <a href="programs.html" class="btn-amber">See Our Programs</a>
+        <a href="get-involved.html" class="btn-ghost-white">Volunteer With Us</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-testimonial">
+        <div class="ht-stars">★★★★★</div>
+        <div class="ht-text">"In a world where networking is often measured by social media posts, we believe real impact comes from authentic conversations, shared learning, meaningful relationships and turning innovative ideas into action."</div>
+        <div class="ht-author">Aurevia Health</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-band">
+  <div class="reveal d1"><span class="sb-num">12+ yrs</span><div class="sb-label">Digital Health Founder Experience</div></div>
+  <div class="reveal d2"><span class="sb-num">6+</span><div class="sb-label">Programs</div></div>
+  <div class="reveal d3"><span class="sb-num">100%</span><div class="sb-label">Inclusive</div></div>
+  <div class="reveal d4"><span class="sb-num">0</span><div class="sb-label">Awkward Conversations</div></div>
+</div>
+
+<section id="programs">
+  <div class="prog-top">
+    <p class="eyebrow reveal">Our Programs</p>
+    <h2 class="h2 reveal d1">Programs built for <em>every community</em></h2>
+  </div>
+  <div class="prog-grid">
+    <div class="prog-card reveal d1">
+      <div class="prog-icon-wrap">🎉</div>
+      <div class="prog-info">
+        <div class="prog-name">Community Events</div>
+        <p class="prog-desc">Accessible health and wellness programs designed to inform, inspire, and connect communities.</p>
+        <a href="programs.html#community-events" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="prog-card reveal d2">
+      <div class="prog-icon-wrap">🎓</div>
+      <div class="prog-info">
+        <div class="prog-name">Youth &amp; Students</div>
+        <p class="prog-desc">Empowering the next generation of leaders through career exploration, mentorship, leadership development, and experiential learning opportunities.</p>
+        <a href="programs.html#youth-students" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="prog-card reveal d2">
+      <div class="prog-icon-wrap">🌿</div>
+      <div class="prog-info">
+        <div class="prog-name">Healthy Aging &amp; Seniors</div>
+        <p class="prog-desc">Supporting older adults with the knowledge, resources, and connections they need to navigate the healthcare system, maintain wellbeing, stay socially connected, and live independently.</p>
+        <a href="programs.html#healthy-aging-seniors" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="prog-card reveal d3">
+      <div class="prog-icon-wrap">💼</div>
+      <div class="prog-info">
+        <div class="prog-name">Emerging Professionals</div>
+        <p class="prog-desc">Designed for students, recent graduates, and early-career professionals seeking to grow their skills, expand their networks, and advance their careers.</p>
+        <a href="programs.html#emerging-professionals" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="prog-card reveal d3">
+      <div class="prog-icon-wrap">🤝</div>
+      <div class="prog-info">
+        <div class="prog-name">Community Organizations</div>
+        <p class="prog-desc">Bringing together nonprofit organizations, healthcare providers, community agencies, and local leaders to share knowledge, strengthen partnerships, and address community needs.</p>
+        <a href="programs.html#community-organizations" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="prog-card reveal d4">
+      <div class="prog-icon-wrap">💡</div>
+      <div class="prog-info">
+        <div class="prog-name">Digital Health &amp; Innovation</div>
+        <p class="prog-desc">Connecting healthcare professionals, researchers, entrepreneurs, startups, and technology leaders to explore emerging trends, share innovative ideas, and tackle real-world healthcare challenges.</p>
+        <a href="programs.html#digital-health-innovation" class="prog-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="padding:0">
+  <div class="about-wrap">
+    <div class="about-img">
+      <div class="about-img-bg"></div>
+      <div class="about-img-text" style="font-size:3rem;line-height:1.3">We Don't Do<br>Traditional<br>Networking.</div>
+      <div class="about-img-stat">
+        <div class="bnum">2025</div>
+        <div class="blabel">Year Founded</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="eyebrow reveal">Our Story</p>
+      <h2 class="h2 reveal d1" style="max-width:380px">What Makes <em>Aurevia Different?</em></h2>
+      <div class="about-values reveal d2">
+        <div class="av-item"><div class="av-check">✓</div><div class="av-text"><strong>Meaningful Connections:</strong> We design conversations that help people actually meet and engage with one another, not just stand in the same room.</div></div>
+        <div class="av-item"><div class="av-check">✓</div><div class="av-text"><strong>Learning First:</strong> Every event includes practical insights, real-world perspectives, and opportunities to learn from others.</div></div>
+        <div class="av-item"><div class="av-check">✓</div><div class="av-text"><strong>Inclusive by Design:</strong> Not everyone loves traditional networking. Our programs create welcoming spaces for introverts, newcomers, students, and first-time attendees.</div></div>
+        <div class="av-item"><div class="av-check">✓</div><div class="av-text"><strong>Community-Led:</strong> The best ideas come from shared experiences. We bring people together to learn from one another, not just from a stage.</div></div>
+      </div>
+      <a href="get-involved.html" class="btn-amber reveal d3" style="display:inline-block;width:fit-content">Support Our Mission</a>
+    </div>
+  </div>
+</section>
+
+<div class="quote-band">
+  <p class="qb-text reveal">"Learn. Connect. Leave Inspired."</p>
+  <p class="qb-author reveal d1">Aurevia Health, 2025</p>
+</div>
+
+<section id="involve">
+  <div>
+    <p class="eyebrow reveal" style="text-align:center">Get Involved</p>
+    <h2 class="h2 reveal d1" style="text-align:center;max-width:480px;margin:0 auto 2.5rem">Come As You Are. <em>Contribute In Your Own Way.</em></h2>
+  </div>
+  <div class="inv-header" style="display:block;margin-bottom:3rem">
+    <div class="inv-options" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:900px;margin:0 auto">
+      <div class="inv-opt reveal d1">
+        <div class="io-icon">🎟️</div>
+        <div><div class="io-title">Attend Our Events</div><div class="io-desc">Join community-based workshops, seminars, and forums focused on health, wellbeing, and innovation.</div></div>
+      </div>
+      <div class="inv-opt reveal d2">
+        <div class="io-icon">🙋</div>
+        <div><div class="io-title">Volunteer With Aurevia</div><div class="io-desc">Support the planning and delivery of community programs, events, and initiatives. Volunteers play an important role in helping us create inclusive spaces and meaningful experiences.</div></div>
+      </div>
+      <div class="inv-opt reveal d3">
+        <div class="io-icon">🎤</div>
+        <div><div class="io-title">Become a Speaker or Contributor</div><div class="io-desc">Share your knowledge, experience, or research with our community. We collaborate with professionals, educators, and lived-experience contributors who want to make health information more accessible and engaging.</div></div>
+      </div>
+      <div class="inv-opt reveal d4">
+        <div class="io-icon">🤝</div>
+        <div><div class="io-title">Partner With Us</div><div class="io-desc">We work with community organizations, healthcare providers, educational institutions, and innovators who share our commitment to accessible, people-centred health engagement.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-brand">Aurevia Health</div>
+      <p class="ft-tag">Bringing digital health leaders together through engaging experiences that spark connections, conversations, and meaningful takeaways.</p>
+      <a href="get-involved.html" class="btn-amber" style="font-size:.82rem;padding:.55rem 1.25rem">Get Involved</a>
+    </div>
+    <div>
+      <div class="ft-col-title">Programs</div>
+      <ul class="ft-links">
+        <li><a href="programs.html">Community Events</a></li>
+        <li><a href="programs.html">Youth &amp; Students</a></li>
+        <li><a href="programs.html">Healthy Aging</a></li>
+        <li><a href="programs.html">Emerging Professionals</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title">Organization</div>
+      <ul class="ft-links">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="get-involved.html">Get Involved</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title">Contact</div>
+      <ul class="ft-links">
+        <li><a href="#">Toronto, Ontario</a></li>
+        <li><a href="mailto:info.aureviahealth@gmail.com">info.aureviahealth@gmail.com</a></li>
+        <li><a href="https://www.instagram.com/aureviahealthca" target="_blank">Instagram: aureviahealthca</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2025 Aurevia Health. All rights reserved.</div>
+    <div class="ft-reg">Registered Canadian Non-Profit</div>
+  </div>
+</footer>
+
+<script>
+const els=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.12});
+els.forEach(el=>obs.observe(el));
+</script>
+<script>
+(function(){
+  var svg=document.getElementById('netSvg');
+  if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  var gridG=document.getElementById('netGrid');
+  var linesG=document.getElementById('netLines');
+  var nodesG=document.getElementById('netNodes');
+  var halo=document.getElementById('domeHalo');
+  var maskRect=document.querySelector('#fadeMask rect');
+  var hero=document.getElementById('hero');
+  var testimonial=document.querySelector('.hero-testimonial');
+
+  function clearG(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+
+  function project(lat, lon, CX, CY, R){
+    var la=lat*Math.PI/180, lo=lon*Math.PI/180;
+    var x=Math.cos(la)*Math.sin(lo);
+    var y=Math.sin(la);
+    var z=Math.cos(la)*Math.cos(lo);
+    var t=-12*Math.PI/180;
+    var y2=y*Math.cos(t)-z*Math.sin(t);
+    var z2=y*Math.sin(t)+z*Math.cos(t);
+    return {x:CX+R*x, y:CY-R*y2, z:z2};
+  }
+
+  function draw(){
+    var heroRect = hero.getBoundingClientRect();
+    var W = heroRect.width, H = heroRect.height;
+    if(W<10||H<10) return;
+
+    // ViewBox matches the hero box 1:1 in real pixels — no scaling mismatch possible.
+    svg.setAttribute('viewBox', '0 0 '+W.toFixed(0)+' '+H.toFixed(0));
+    if(maskRect){ maskRect.setAttribute('width', W); maskRect.setAttribute('height', H); }
+
+    // Centre the globe exactly on the testimonial box, measured live.
+    var tRect = testimonial ? testimonial.getBoundingClientRect() : null;
+    var boxVisible = tRect && tRect.width > 4 && tRect.height > 4;
+    var CX, CY;
+    if(boxVisible){
+      CX = tRect.left - heroRect.left + tRect.width/2;
+      CY = tRect.top - heroRect.top + tRect.height/2;
+    } else {
+      // No box on screen (e.g. mobile, where it's hidden) — fall back to a sensible spot.
+      CX = W*0.5; CY = H*0.45;
+    }
+    // Shift the whole globe DOWN so it doesn't sit high near the top of the hero.
+    CY += Math.min(H*0.16, 140);
+    // Compute the exact maximum radius so EVERY point of the dome (not just an
+    // estimate) stays within the hero bounds — this removes all guesswork.
+    var MARGIN = 34; // buffer for node circle radius + stroke
+    var tilt = -12*Math.PI/180;
+    var maxR = Infinity;
+    for(var slat=-35; slat<=80; slat+=5){
+      for(var slon=-180; slon<=180; slon+=10){
+        var sla=slat*Math.PI/180, slo=slon*Math.PI/180;
+        var ux=Math.cos(sla)*Math.sin(slo);
+        var uy=Math.sin(sla);
+        var uz=Math.cos(sla)*Math.cos(slo);
+        var uy2=uy*Math.cos(tilt)-uz*Math.sin(tilt); // unit y-offset (unscaled)
+        if(ux>0.001) maxR=Math.min(maxR,(W-MARGIN-CX)/ux);
+        else if(ux<-0.001) maxR=Math.min(maxR,(CX-MARGIN)/(-ux));
+        if(uy2>0.001) maxR=Math.min(maxR,(CY-MARGIN)/uy2);
+        else if(uy2<-0.001) maxR=Math.min(maxR,(H-MARGIN-CY)/(-uy2));
+      }
+    }
+    var R = Math.min(maxR, Math.min(W,H)*0.6);
+    R = Math.max(R, 100);
+
+    halo.setAttribute('cx',CX); halo.setAttribute('cy', CY - R*0.1);
+    halo.setAttribute('rx', R*1.25); halo.setAttribute('ry', R*1.05);
+
+    clearG(gridG); clearG(linesG); clearG(nodesG);
+
+    // Latitude rings
+    for(var lat=-30; lat<=75; lat+=25){
+      var d='', started=false;
+      for(var lon=-180; lon<=180; lon+=6){
+        var p=project(lat,lon,CX,CY,R);
+        d += (started?' L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1); started=true;
+      }
+      var path=document.createElementNS(NS,'path');
+      path.setAttribute('d',d); path.setAttribute('class','net-grid-line');
+      gridG.appendChild(path);
+    }
+    // Longitude meridians
+    for(var lonI=-150; lonI<=180; lonI+=30){
+      var d2='', s2=false;
+      for(var la2=-40; la2<=90; la2+=6){
+        var p2=project(la2,lonI,CX,CY,R);
+        d2 += (s2?' L':'M')+p2.x.toFixed(1)+','+p2.y.toFixed(1); s2=true;
+      }
+      var path2=document.createElementNS(NS,'path');
+      path2.setAttribute('d',d2); path2.setAttribute('class','net-grid-line');
+      gridG.appendChild(path2);
+    }
+
+    // Evenly-spaced people nodes (rejection sampling avoids crowding)
+    var pts=[];
+    var MIN_DIST = R*0.22;
+    var tries=0, seed=7;
+    function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
+    while(pts.length<20 && tries<3000){
+      tries++;
+      var lat=-25+rnd()*95;
+      var lon=-170+rnd()*340;
+      var p=project(lat,lon,CX,CY,R);
+      if(p.z < -0.15) continue;
+      var ok=true;
+      for(var i=0;i<pts.length;i++){
+        if(Math.hypot(p.x-pts[i].x,p.y-pts[i].y) < MIN_DIST){ ok=false; break; }
+      }
+      if(ok) pts.push(p);
+    }
+    pts.sort(function(a,b){return a.z-b.z;});
+
+    function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
+    pts.forEach(function(n,i){
+      var others=pts.map(function(m,j){return {j:j,d:dist(n,m)};})
+        .filter(function(o){return o.j!==i;})
+        .sort(function(a,b){return a.d-b.d;});
+      var made=0;
+      for(var k=0;k<others.length && made<2;k++){
+        if(others[k].d < R*0.7 && others[k].d > MIN_DIST*0.8){
+          var m=pts[others[k].j];
+          var ln=document.createElementNS(NS,'line');
+          ln.setAttribute('x1',n.x.toFixed(1));ln.setAttribute('y1',n.y.toFixed(1));
+          ln.setAttribute('x2',m.x.toFixed(1));ln.setAttribute('y2',m.y.toFixed(1));
+          ln.setAttribute('class','net-line');
+          var back=(n.z+m.z)/2<=0;
+          ln.setAttribute('stroke-opacity', back?'0.14':'0.32');
+          linesG.appendChild(ln);
+          made++;
+        }
+      }
+    });
+
+    var sf = R/320;
+    pts.forEach(function(n){
+      var front=n.z>0;
+      var s=(front?1:0.72)*sf;
+      var op=front?0.9:0.4;
+      var g=document.createElementNS(NS,'g');
+      g.setAttribute('opacity',op);
+      var ring=document.createElementNS(NS,'circle');
+      ring.setAttribute('cx',n.x);ring.setAttribute('cy',n.y);ring.setAttribute('r',16*s);
+      ring.setAttribute('class','net-ring');
+      var head=document.createElementNS(NS,'circle');
+      head.setAttribute('cx',n.x);head.setAttribute('cy',n.y-4*s);head.setAttribute('r',4.5*s);
+      head.setAttribute('class','net-icon');
+      var body=document.createElementNS(NS,'path');
+      body.setAttribute('d','M'+(n.x-7*s)+','+(n.y+10*s)+' a'+(7*s)+','+(7*s)+' 0 0 1 '+(14*s)+',0');
+      body.setAttribute('class','net-icon');
+      g.appendChild(ring);g.appendChild(head);g.appendChild(body);
+      nodesG.appendChild(g);
+    });
+  }
+
+  draw();
+  var t;
+  window.addEventListener('resize', function(){ clearTimeout(t); t=setTimeout(draw,150); });
+})();
+</script>
+
+
+
+<script>
+(function(){
+  var t=document.getElementById('navToggle'), m=document.getElementById('mobileMenu');
+  if(t&&m){
+    t.addEventListener('click',function(){t.classList.toggle('open');m.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){t.classList.remove('open');m.classList.remove('open');});});
+  }
+})();
+</script>
+</body>
+</html>
