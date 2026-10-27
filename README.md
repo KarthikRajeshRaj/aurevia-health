@@ -11,7 +11,7 @@ Production website for **Aurevia Health**, a Toronto-based digital-health nonpro
 
 ## About Aurevia Health
 
-Aurevia Health connects emerging digital-health leaders through events and programs focused on authentic connection, mentorship, and knowledge-sharing — for students, early-career professionals, healthcare providers, and community organizations.
+Aurevia Health connects emerging digital-health leaders through events and programs focused on authentic connection, mentorship, and knowledge-sharing for students, early-career professionals, healthcare providers, and community organizations.
 
 ## My Role
 
@@ -29,7 +29,7 @@ Notable implementation details:
 
 ## Pages
 
-Six pages — Home, Programs, About, Get Involved, Contact, Careers — sharing a consistent design system, navigation, and footer. Visual direction and page structure were designed from PM's requests and written content brief.
+Six pages: Home, Programs, About, Get Involved, Contact, Careers. All sharing a consistent design system, navigation, and footer. Visual direction and page structure were designed from PM's requests and written content brief.
 
 ## Testing & QA
 
